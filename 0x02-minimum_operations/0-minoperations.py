@@ -1,4 +1,18 @@
+#!/usr/bin/python3
+
+"""
+Function to find the least amount of operations to produce a number n
+of characters
+"""
+
+
 def minOperations(n):
+    """
+    Parameters:
+    n: operations to be done
+    Returns:
+    least amount of operations to produce n characters
+    if n is impossible just return 0"""
     if n <= 1:
         return 0
 
