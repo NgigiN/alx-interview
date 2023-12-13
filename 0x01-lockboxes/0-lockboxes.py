@@ -1,4 +1,8 @@
 #!/usr/bin/python3
+"""
+Interview question solution on the lock boxes problem
+"""
+
 
 def canUnlockAll(boxes):
     n = len(boxes)
