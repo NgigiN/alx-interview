@@ -1,20 +1,16 @@
 #!/usr/bin/python3
 
-from collections import deque
-
 def canUnlockAll(boxes):
     n = len(boxes)
-    visited = [False] * n
-    visited[0] = True
+    item = [False] * n
+    item[0] = True
+    stack = [0]
 
-    queue = deque([0])
+    while stack:
+        box = stack.pop()
+        for each in boxes[box]:
+            if each >= 0 and each < n and not item[each]:
+                item[each] = True
+                stack.append(each)
 
-    while queue:
-        current_box = queue.popleft()
-
-        for key in boxes[current_box]:
-            if key < n and not visited[key]:
-                visited[key] = True
-                queue.append(key)
-
-    return all(visited)
+    return all(item)
