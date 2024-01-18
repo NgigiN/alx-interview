@@ -13,20 +13,24 @@ def validUTF8(data):
     i = 0
 
     while i < n:
-        # Gets the number of bytes needed for the current character
-        num_bytes = 1 if (data[i] >> 7) == 0 else (
-            (data[i] >> 5) & 0b11111) + 1
-
-        # Checks if there are enough bytes for the current character
-        if i + num_bytes > n or num_bytes > 4:
+        if (data[i] & 0xFF) >> 7 == 0:
+            num_bytes = 1
+        elif (data[i] & 0xFF) >> 5 == 0b110:
+            num_bytes = 2
+        elif (data[i] & 0xFF) >> 4 == 0b1110:
+            num_bytes = 3
+        elif (data[i] & 0xFF) >> 3 == 0b11110:
+            num_bytes = 4
+        else:
             return False
 
-        # Checks if the following bytes start with 10
+        if i + num_bytes > n:
+            return False
+
         for j in range(1, num_bytes):
-            if (data[i+j] >> 6) != 0b10:
+            if (data[i+j] & 0xFF) >> 6 != 0b10:
                 return False
 
-        # Moves to the next character
         i += num_bytes
 
     return True
