@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-	Script to check if a given data set represents a valid UTF-8 encoding
+    Script to check if a given data set represents a valid UTF-8 encoding
 """
 
 
@@ -18,7 +18,7 @@ def validUTF8(data):
             (data[i] >> 5) & 0b11111) + 1
 
         # Checks if there are enough bytes for the current character
-        if i + num_bytes > n:
+        if i + num_bytes > n or num_bytes > 4:
             return False
 
         # Checks if the following bytes start with 10
