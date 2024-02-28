@@ -23,4 +23,8 @@ def makeChange(coins, total):
         while total >= coin:
             total = total - coin
             coin_counter = coin_counter + 1
-    return coin_counter
+
+    if total == 0:
+        return coin_counter
+    else:
+        return -1
